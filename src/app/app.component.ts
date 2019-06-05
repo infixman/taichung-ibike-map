@@ -52,13 +52,16 @@ export class AppComponent {
   ngOnInit() {
     let station;
     let bike;
+    let mapping;
     this.ibikeService.getBikeStation()
     .subscribe(
         data => {
             station = this.csv2obj(data);
             this.ibikeService.getBike().subscribe(
               data => {
-                bike = this.getTableJson(data);
+                bike = this.table2obj(data);
+                mapping = this.mappingObj(station, bike);
+                console.log(mapping);
               },
               error => {
                 console.log(error);
@@ -75,7 +78,7 @@ export class AppComponent {
     return new DOMParser().parseFromString(htmlstr, "text/html");
   }
 
-  getTableJson(htmlstr) {
+  table2obj(htmlstr) {
     var table = this.str2dom(htmlstr).getElementById('myTable');
     const result = [];
     [].forEach.call(
@@ -85,10 +88,9 @@ export class AppComponent {
         if(rows.length >= 2) {
           let position = rows[1].innerText.trim().split('\n');
           result.push({
-            name: position[0].trim(),
-            address: position[1].trim(),
-            bikes: rows[2].innerText.trim(),
-            empty: rows[3].innerText.trim(),
+            Position: position[0].trim(),
+            AvailableCNT: rows[2].innerText.trim(),
+            EmpCNT: rows[3].innerText.trim(),
           });
         }
       }
@@ -110,6 +112,21 @@ export class AppComponent {
  
         result.push(obj);
     }
-    return JSON.stringify(result);
+    return JSON.parse(JSON.stringify(result));
  }
+
+  mappingObj(station, bike) {
+    console.log(station);
+    console.log(bike);
+    
+    for (var i = 0; i < station.length; i++) {
+      for (var j = 0; j < bike.length; j++) {
+        if (station[i].Position === bike[j].Position) {
+          station[i].AvailableCNT = bike[j].AvailableCNT;
+          station[i].EmpCNT = bike[j].EmpCNT;
+        }
+      }
+    }
+    return station;
+  }
 }
