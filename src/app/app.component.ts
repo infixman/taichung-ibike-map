@@ -49,15 +49,15 @@ export class AppComponent {
   ) {}
   
   ngOnInit() {
+    let station;
+    let bike;
     this.ibikeService.getBikeStation()
     .subscribe(
         data => {
-            console.log(data);
-
+            station = data;
             this.ibikeService.getBike().subscribe(
               data => {
-                console.log(data)
-
+                bike = this.getTableJson(data);
               },
               error => {
                 console.log(error);
@@ -68,5 +68,31 @@ export class AppComponent {
           console.log(error);
         }
     );
+  }
+
+  str2dom(htmlstr) {
+    return new DOMParser().parseFromString(htmlstr, "text/html");
+  }
+
+  getTableJson(htmlstr) {
+    var table = this.str2dom(htmlstr).getElementById('myTable');
+    const result = [];
+    [].forEach.call(
+      table.querySelectorAll('tr'),
+      (lineElement) => {
+        const rows = lineElement.querySelectorAll('td');
+        if(rows.length >= 2) {
+          let position = rows[1].innerText.trim().split('\n');
+          result.push({
+            name: position[0].trim(),
+            address: position[1].trim(),
+            bikes: rows[2].innerText.trim(),
+            empty: rows[3].innerText.trim(),
+          });
+        }
+      }
+    );
+
+    return result;
   }
 }
