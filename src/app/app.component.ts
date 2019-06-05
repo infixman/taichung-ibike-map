@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IbikeService } from 'src/app/_service/ibike.service';
 
 @Component({
   selector: 'app-root',
@@ -42,4 +43,22 @@ export class AppComponent {
         ]
     }
   ];
+
+  constructor(
+    private ibikeService: IbikeService
+  ) {}
+  
+  ngOnInit() {
+    this.ibikeService.getBikeStation()
+    .subscribe(
+        data => {
+            console.log(data);
+
+            
+        },
+        error => {
+            console.log(error);
+        }
+    );
+  }
 }
