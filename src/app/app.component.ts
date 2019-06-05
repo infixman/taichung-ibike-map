@@ -3,10 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: [
-    './app.component.css',
-    "../../node_modules/snazzy-info-window/dist/snazzy-info-window.css"
-  ]
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'Taichung iBike Map';
