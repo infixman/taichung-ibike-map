@@ -1,4 +1,8 @@
-# TaichungIbikeMap
+# 台中 iBike 地圖
+
+打開 ./src/app/app.module.ts 找到 apiKey，然後換成你的 Google Map Api Key 就可以跑囉
+
+## App
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.1.
 
