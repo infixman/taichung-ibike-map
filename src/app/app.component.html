@@ -1,9 +1,12 @@
 <h1>{{ title }}</h1>
 <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoomValue" [styles]="styles">
-  <agm-marker [latitude]="lat" [longitude]="lng">
-    <agm-snazzy-info-window [maxWidth]="200" [closeWhenOthersOpen]="true">
+  <agm-marker *ngFor="let item of mapping; let i = index" [latitude]="item.Y" [longitude]="item.X" [label]="getLabel(item)" [iconUrl]="getIcon(item)">
+    <agm-snazzy-info-window [maxWidth]="300" [closeWhenOthersOpen]="true">
       <ng-template>
-        123
+        {{ item.Position }}<br>
+        {{ item.CAddress }}<br>
+        可租: {{ item.AvailableCNT }}<br>
+        空位: {{ item.EmpCNT }}
       </ng-template>
     </agm-snazzy-info-window>
   </agm-marker>

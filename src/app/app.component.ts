@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IbikeService } from 'src/app/_service/ibike.service';
-import { ConsoleReporter } from 'jasmine';
 
 @Component({
   selector: 'app-root',
@@ -49,10 +48,11 @@ export class AppComponent {
     private ibikeService: IbikeService
   ) {}
   
+  mapping = [];
+
   ngOnInit() {
     let station;
     let bike;
-    let mapping;
     this.ibikeService.getBikeStation()
     .subscribe(
         data => {
@@ -60,8 +60,8 @@ export class AppComponent {
             this.ibikeService.getBike().subscribe(
               data => {
                 bike = this.table2obj(data);
-                mapping = this.mappingObj(station, bike);
-                console.log(mapping);
+                this.mapping = this.mappingObj(station, bike);
+                console.log(this.mapping);
               },
               error => {
                 console.log(error);
@@ -115,10 +115,7 @@ export class AppComponent {
     return JSON.parse(JSON.stringify(result));
  }
 
-  mappingObj(station, bike) {
-    console.log(station);
-    console.log(bike);
-    
+  mappingObj(station, bike) {    
     for (var i = 0; i < station.length; i++) {
       for (var j = 0; j < bike.length; j++) {
         if (station[i].Position === bike[j].Position) {
@@ -128,5 +125,21 @@ export class AppComponent {
       }
     }
     return station;
+  }
+
+  parseFloat(n) {
+    return parseFloat(n)
+  }
+
+  getLabel(item) {
+    return item.AvailableCNT;
+  }
+
+  getIcon(item) {
+    if (item.AvailableCNT === 0) {
+      return './assets/pinEmpty.png';
+    }
+
+    return './assets/pin.png';
   }
 }

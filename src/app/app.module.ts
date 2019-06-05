@@ -14,7 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AgmCoreModule.forRoot({
-      apiKey: '',
+      apiKey: 'AIzaSyAVmGvguca9PPKd2bmYuCk9PQakFi0SX4w',
       language: 'zh-TW'
     }),
     AgmSnazzyInfoWindowModule,
