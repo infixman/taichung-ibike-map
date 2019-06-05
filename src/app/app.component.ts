@@ -54,10 +54,18 @@ export class AppComponent {
         data => {
             console.log(data);
 
-            
+            this.ibikeService.getBike().subscribe(
+              data => {
+                console.log(data)
+
+              },
+              error => {
+                console.log(error);
+              }
+            );
         },
         error => {
-            console.log(error);
+          console.log(error);
         }
     );
   }

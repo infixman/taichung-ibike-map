@@ -3,5 +3,10 @@
     "target": "http://datacenter.taichung.gov.tw/swagger",
     "secure": false,
     "changeOrigin": true
+  },
+  "/list": {
+    "target": "http://wa.i.youbike.com.tw/station",
+    "secure": false,
+    "changeOrigin": true
   }
 }
