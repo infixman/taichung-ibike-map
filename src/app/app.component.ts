@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IbikeService } from 'src/app/_service/ibike.service';
+import { ConsoleReporter } from 'jasmine';
 
 @Component({
   selector: 'app-root',
@@ -54,7 +55,7 @@ export class AppComponent {
     this.ibikeService.getBikeStation()
     .subscribe(
         data => {
-            station = data;
+            station = this.csv2obj(data);
             this.ibikeService.getBike().subscribe(
               data => {
                 bike = this.getTableJson(data);
@@ -95,4 +96,20 @@ export class AppComponent {
 
     return result;
   }
+
+  csv2obj(csvStr) {
+    var lines = csvStr.split("\n"); 
+    var result = []; 
+    var headers = lines[0].split(",");
+    for (var i = 1; i < lines.length-1; i++) { 
+        var obj = {};
+        var currentline = lines[i].split(","); 
+        for (var j = 0; j < headers.length; j++) {
+            obj[headers[j]] = currentline[j];
+        }
+ 
+        result.push(obj);
+    }
+    return JSON.stringify(result);
+ }
 }
