@@ -1,0 +1,7 @@
+{
+  "/OpenData": {
+    "target": "http://datacenter.taichung.gov.tw/swagger",
+    "secure": false,
+    "changeOrigin": true
+  }
+}
