@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  stationApiUrl: 'http://datacenter.taichung.gov.tw/swagger',
-  bikeApiUrl: 'http://wa.i.youbike.com.tw/station'
+  stationApiUrl: 'https://datacenter.taichung.gov.tw/swagger',
+  bikeApiUrl: 'https://cors.io/?http://wa.i.youbike.com.tw/station'
 };
