@@ -146,4 +146,8 @@ export class AppComponent {
     return '';
 
   }
+
+  getRepoName() {
+    return this.env.repoName;
+  }
 }
