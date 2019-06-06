@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IbikeService } from 'src/app/_service/ibike.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,7 @@ import { IbikeService } from 'src/app/_service/ibike.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  private env = environment;
   title = 'Taichung iBike Map';
   lat: number = 24.1580195;
   lng: number = 120.6569436;
@@ -132,10 +134,10 @@ export class AppComponent {
   }
 
   getIcon(item) {
-    if ((item.AvailableCNT === 0 || item.AvailableCNT === '0') && (item.EmpCNT === 0 || item.EmpCNT === '0')) return './assets/icon_service.png';
-    if (item.AvailableCNT === 0 || item.AvailableCNT === '0') return './assets/icon_nobike.png';
-    if (item.EmpCNT === 0 || item.EmpCNT === '0') return './assets/icon_full.png';
-    return './assets/icon_nomo.png';
+    if ((item.AvailableCNT === 0 || item.AvailableCNT === '0') && (item.EmpCNT === 0 || item.EmpCNT === '0')) return this.env.repoName + '/assets/icon_service.png';
+    if (item.AvailableCNT === 0 || item.AvailableCNT === '0') return this.env.repoName + './assets/icon_nobike.png';
+    if (item.EmpCNT === 0 || item.EmpCNT === '0') return this.env.repoName + '/assets/icon_full.png';
+    return this.env.repoName + '/assets/icon_nomo.png';
   }
 
   getService(item) {
