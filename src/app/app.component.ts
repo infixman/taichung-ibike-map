@@ -135,7 +135,7 @@ export class AppComponent {
 
   getIcon(item) {
     if ((item.AvailableCNT === 0 || item.AvailableCNT === '0') && (item.EmpCNT === 0 || item.EmpCNT === '0')) return this.env.repoName + '/assets/icon_service.png';
-    if (item.AvailableCNT === 0 || item.AvailableCNT === '0') return this.env.repoName + './assets/icon_nobike.png';
+    if (item.AvailableCNT === 0 || item.AvailableCNT === '0') return this.env.repoName + '/assets/icon_nobike.png';
     if (item.EmpCNT === 0 || item.EmpCNT === '0') return this.env.repoName + '/assets/icon_full.png';
     return this.env.repoName + '/assets/icon_nomo.png';
   }
