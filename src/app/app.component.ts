@@ -131,15 +131,17 @@ export class AppComponent {
     return parseFloat(n)
   }
 
-  getLabel(item) {
-    return item.AvailableCNT;
+  getIcon(item) {
+    if ((item.AvailableCNT === 0 || item.AvailableCNT === '0') && (item.EmpCNT === 0 || item.EmpCNT === '0')) return './assets/icon_service.png';
+    if (item.AvailableCNT === 0 || item.AvailableCNT === '0') return './assets/icon_nobike.png';
+    if (item.EmpCNT === 0 || item.EmpCNT === '0') return './assets/icon_full.png';
+    return './assets/icon_nomo.png';
   }
 
-  getIcon(item) {
-    if (item.AvailableCNT === 0) {
-      return './assets/pinEmpty.png';
-    }
+  getService(item) {
+    if ((item.AvailableCNT === 0 || item.AvailableCNT === '0') && (item.EmpCNT === 0 || item.EmpCNT === '0')) return `**維修中**
+`;
+    return '';
 
-    return './assets/pin.png';
   }
 }

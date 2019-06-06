@@ -1,3 +1,4 @@
+// 其實還有一隻API可以拿到完整的 (https://i.youbike.com.tw/station/map)，不用靠兩隻API，但是那隻完整的會認Headers的Origin，純前端不能修改Origin，所以放棄那隻API
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -23,8 +24,9 @@ export class IbikeService {
         return headers;
     }
 
-    get(url) {        
+    get(url) {
         return this.http.get(url, {
+            responseType: 'text',
             headers: this.getHeaders()
         });
     }

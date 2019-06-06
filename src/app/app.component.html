@@ -1,12 +1,22 @@
 <h1>{{ title }}</h1>
+<div style="vertical-align:middle;">
+  <img src="./assets/icon_service.png" style="vertical-align:middle;"> - 維護中&nbsp;&nbsp;
+  <img src="./assets/icon_nobike.png" style="vertical-align:middle;"> - 無可租&nbsp;&nbsp;
+  <img src="./assets/icon_full.png" style="vertical-align:middle;"> - 無空位&nbsp;&nbsp;
+  <img src="./assets/icon_nomo.png" style="vertical-align:middle;"> - 正常
+</div>
 <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoomValue" [styles]="styles">
-  <agm-marker *ngFor="let item of mapping; let i = index" [latitude]="item.Y" [longitude]="item.X" [label]="getLabel(item)" [iconUrl]="getIcon(item)">
+  <agm-marker *ngFor="let item of mapping; let i = index" [latitude]="item.Y" [longitude]="item.X" [iconUrl]="getIcon(item)">
     <agm-snazzy-info-window [maxWidth]="300" [closeWhenOthersOpen]="true">
+      
       <ng-template>
-        {{ item.Position }}<br>
-        {{ item.CAddress }}<br>
-        可租: {{ item.AvailableCNT }}<br>
-        空位: {{ item.EmpCNT }}
+          <div style="word-break: break-all;white-space:pre-line;">            
+              <font color="#FF0000">{{ getService(item) }}</font>
+              {{ item.Position }}<br>
+              {{ item.CAddress }}<br>
+              可租: {{ item.AvailableCNT }}<br>
+              空位: {{ item.EmpCNT }}
+          </div>
       </ng-template>
     </agm-snazzy-info-window>
   </agm-marker>
