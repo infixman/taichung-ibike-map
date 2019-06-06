@@ -23,14 +23,8 @@ export class IbikeService {
         return headers;
     }
 
-    get(url, type?) {
-        let resType = type;
-        if (!type) {
-            resType = 'text';
-        }
-        
+    get(url) {        
         return this.http.get(url, {
-            responseType: resType,
             headers: this.getHeaders()
         });
     }
